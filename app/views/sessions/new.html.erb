@@ -1,2 +1,8 @@
-<h1>Sessions#new</h1>
-<p>Find me in app/views/sessions/new.html.erb</p>
+<p id="notice"><%= notice %></p>
+
+<p>Please enter your credentials to continue:</p>
+<%= form_tag(url: login_path) do |f|%>
+  <div>Email: <%= text_field_tag :email %></div>
+  <div>Password: <%= password_field_tag :password %></div>
+  <%= submit_tag :submit %>
+<% end %>
