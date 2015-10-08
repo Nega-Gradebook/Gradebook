@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'minitest/pride'
 
 class GradesControllerTest < ActionController::TestCase
   setup do
