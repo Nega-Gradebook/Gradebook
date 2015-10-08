@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  get 'sessions/new'
 
+  root 'sessions#new'
+
+  resources :sessions
   resources :grades
   resources :parents
   resources :students
