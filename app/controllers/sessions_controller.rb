@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
       student = Student.find_by_email(params[:email])
       if teacher && teacher.authenticate(params[:password])
         session[:logged_in_teacher] = teacher.id
-        redirect_to teachers_path, notice: "You successfully logged in."
+        redirect_to teacher_path(teacher.id), notice: "You successfully logged in."
       elsif student && student.authenticate(params[:password])
         session[:logged_in_student] = student.id
         redirect_to student_path(student.id), notice: "You successfully logged in."
