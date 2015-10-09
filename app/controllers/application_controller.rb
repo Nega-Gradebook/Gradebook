@@ -10,4 +10,5 @@ class ApplicationController < ActionController::Base
   private def logged_in_parent
     @parent = Parent.find_by(session[:parent_id])
   end
+
 end
