@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   private def logged_in?
-    redirect_to login_path, notice: "You've been redirected" unless session[:logged_in_teacher] || session[:logged_in_student] || session[:logged_in_parent]
+    redirect_to login_path, notice: "access denied." unless session[:logged_in_teacher] || session[:logged_in_student] || session[:logged_in_parent]
   end
 
 end

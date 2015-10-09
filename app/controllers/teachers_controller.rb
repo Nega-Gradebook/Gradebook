@@ -6,6 +6,7 @@ class TeachersController < ApplicationController
   # GET /teachers.json
   def index
     @teachers = Teacher.all
+    # @students = Student.all
   end
 
   # GET /teachers/1

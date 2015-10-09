@@ -1,16 +1,37 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
-  <%= @teacher.name %>
+  <h2><strong>Name: </strong><%= @teacher.name %></h2>
 </p>
 
 <p>
-  <strong>Email:</strong>
-  <%= @teacher.email %>
+  <h2><strong>Email: </strong><%= @teacher.email %></h2>
 </p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Student Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
 
+  <tbody>
+    <% @teacher.students.each do |student| %>
+      <tr>
+        <td><%= student.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br><br>
 
-<%= link_to 'Edit', edit_teacher_path(@teacher) %> |
-<%= link_to 'Back', teachers_path %>
+<p><%= link_to 'Teacher Index', teachers_path %></p>
+<p><%= link_to 'Parent Index', parents_path %></p>
+<p><%= link_to 'Student Index', students_path %></p>
+<p><%= link_to 'Grade Index', grades_path %></p>
+
+<p><%= link_to 'Create Teacher', new_teacher_path %></p>
+<p><%= link_to 'Create Parent', new_parent_path %>
+<p><%= link_to 'Create Student', new_student_path %></p>
+<p><%= link_to 'Add Grade', new_grade_path %></p>
