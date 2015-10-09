@@ -18,17 +18,9 @@
         <td><%= student.name %></td>
         <td><%= student.email %></td>
         <td><%= student.teacher_id %></td>
-        <td><%= link_to 'Show', student %></td>
-        <td><%= link_to 'Edit', edit_student_path(student) %></td>
-        <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Student', new_student_path %>
-<div><%= link_to 'Teacher Index', teachers_path %></div>
-<div><%= link_to 'Parent Index', parents_path %></div>
-<div><%= link_to 'Student Index', students_path %></div>

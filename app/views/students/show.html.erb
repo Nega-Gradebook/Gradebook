@@ -10,12 +10,29 @@
   <%= @student.email %>
 </p>
 
-
-
 <p>
   <strong>Teacher:</strong>
   <%= @student.teacher_id %>
 </p>
 
-<%= link_to 'Edit', edit_student_path(@student) %> |
+<table>
+  <thead>
+    <tr>
+      <th>Assignment Name</th>
+      <th>Grade</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @student.grades.each do |grade| %>
+      <tr>
+        <td><%= grade.assignment_name %></td>
+        <td><%= grade.grade %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
 <%= link_to 'Back', students_path %>
