@@ -6,16 +6,16 @@ class SessionsController < ApplicationController
       parent = Parent.find_by_email(params[:email])
       student = Student.find_by_email(params[:email])
       if teacher && teacher.authenticate(params[:password])
-        session[:logged_in_teacher] = "teacher"
+        session[:user_type] = "Teacher"
         session[:user_id] = teacher.id
         redirect_to teacher_path(teacher.id), notice: "You successfully logged in."
       elsif student && student.authenticate(params[:password])
-        session[:logged_in_student] = "student"
+        session[:user_type] = "Student"
         session[:user_id] = student.id
         redirect_to student_path(student.id), notice: "You successfully logged in."
       elsif parent && parent.authenticate(params[:password])
-        session[:logged_in_parent] = "parent"
-        session[:user_id] = parent.id
+        session[:user_type] = "Parent"
+        session[:user_id] = parent.student_id
         redirect_to student_path(parent.student_id), notice: "You successfully logged in."
       else
         redirect_to login_path, notice: "Your login was not successful."
@@ -28,9 +28,8 @@ class SessionsController < ApplicationController
 
 
   def destroy
-    session[:logged_in_teacher] = false
-    session[:logged_in_student] = false
-    session[:logged_in_parent] = false
+    session[:user_type] = false
+    session[:user_id] = false
     redirect_to login_path, alert: "you have successfully logged out."
   end
 
