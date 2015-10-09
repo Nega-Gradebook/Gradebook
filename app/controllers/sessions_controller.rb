@@ -15,13 +15,8 @@ class SessionsController < ApplicationController
         redirect_to student_path(student.id), notice: "You successfully logged in."
       elsif parent && parent.authenticate(params[:password])
         session[:user_type] = "Parent"
-<<<<<<< HEAD
-        session[:user_id] = parent.student_id
-        redirect_to student_path(parent.student_id), notice: "You successfully logged in."
-=======
         session[:user_id] = parent.id
         redirect_to student_path(parent.student), notice: "You successfully logged in."
->>>>>>> 22984792aa2d59ce6c1fb3003022b26fe99378df
       else
         redirect_to login_path, notice: "Your login was not successful."
       end
