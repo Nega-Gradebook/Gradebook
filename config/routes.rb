@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
-  get 'sessions/new'
-  root 'sessions#new'
+  root 'teachers#index'
+  post 'login' => 'sessions#create'
+  get  'login' => 'sessions#new'
+  delete 'logout' => 'sessions#destroy'
 
-  post 'login' => 'session#create'
-  get  'login' => 'session#new'
-  delete 'logout' => 'session#destroy'
 
   resources :grades
   resources :parents
