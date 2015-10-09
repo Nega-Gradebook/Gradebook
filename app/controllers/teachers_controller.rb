@@ -1,6 +1,7 @@
 class TeachersController < ApplicationController
   before_action :set_teacher, only: [:show, :edit, :update, :destroy]
   before_action :logged_in?
+  before_action :others_allowed_access?
 
   # GET /teachers
   # GET /teachers.json
@@ -57,4 +58,11 @@ class TeachersController < ApplicationController
     def teacher_params
       params.require(:teacher).permit( :name, :email, :password)
     end
+
+    def others_allowed_access?
+      # parent_ids = @student.parents.map {|p| p.id}
+    unless (session[:user_id] == @teacher.id && session[:user_type] == "Teacher")
+      redirect_to root_path, notice: "access denied, Nice try."
+    end
+  end
 end
