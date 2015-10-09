@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
 
   def create
-    # if request.post?
+    if request.post?
       teacher = Teacher.find_by_email(params[:email])
       parent = Parent.find_by_email(params[:email])
       student = Student.find_by_email(params[:email])
@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
       else
         redirect_to login_path, notice: "Your login was not successful."
       end
-    # end
+    end
   end
 
   def new
