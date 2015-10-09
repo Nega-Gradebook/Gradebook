@@ -1,6 +1,7 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :edit, :update, :destroy]
   before_action :logged_in?
+  before_action :allowed_access?
 
   # GET /students
   # GET /students.json
@@ -71,5 +72,11 @@ class StudentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
       params.require(:student).permit(:name, :email, :password, :teacher_id)
+    end
+
+    def allowed_access?
+      unless session[:user_id] == @student.id && session[:logged_in_student] == "student"
+        redirect_to root_path, notice: "access denied."
+      end
     end
 end
