@@ -1,7 +1,7 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :edit, :update, :destroy]
   before_action :logged_in?
-  before_action :allowed_access?
+  before_action :parent_allowed_access?, only: [:show]
 
   # GET /students
   # GET /students.json
@@ -74,9 +74,10 @@ class StudentsController < ApplicationController
       params.require(:student).permit(:name, :email, :password, :teacher_id)
     end
 
-    def allowed_access?
-      unless session[:user_id] == @student.id && session[:logged_in_student] == "student"
-        redirect_to root_path, notice: "access denied."
+    def parent_allowed_access?
+      parent_ids = @student.parents.map {|p| p.id}
+      unless (parent_ids.include?(session[:user_id]) && session[:user_type] == "Parent") || (session[:user_id] == @student.id && session[:user_type] == "Student")
+        redirect_to root_path, notice: "access denied, I need a parent!!."
       end
     end
 end
