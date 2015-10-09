@@ -33,8 +33,6 @@ class TeachersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /teachers/1
-  # PATCH/PUT /teachers/1.json
   def update
     if @teacher.update(teacher_params)
       redirect_to @teacher, notice: 'Teacher was successfully updated.'
@@ -43,8 +41,6 @@ class TeachersController < ApplicationController
     end
   end
 
-  # DELETE /teachers/1
-  # DELETE /teachers/1.json
   def destroy
     @teacher.destroy
     redirect_to teachers_url, notice: 'Teacher was successfully destroyed.'
