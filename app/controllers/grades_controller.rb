@@ -26,29 +26,20 @@ class GradesController < ApplicationController
   # POST /grades.json
   def create
     @grade = Grade.new(grade_params)
-
-    respond_to do |format|
-      if @grade.save
-        format.html { redirect_to @grade, notice: 'Grade was successfully created.' }
-        format.json { render :show, status: :created, location: @grade }
-      else
-        format.html { render :new }
-        format.json { render json: @grade.errors, status: :unprocessable_entity }
-      end
+    if @grade.save
+      redirect_to @grade, notice: 'Grade was successfully created.'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /grades/1
   # PATCH/PUT /grades/1.json
   def update
-    respond_to do |format|
-      if @grade.update(grade_params)
-        format.html { redirect_to @grade, notice: 'Grade was successfully updated.' }
-        format.json { render :show, status: :ok, location: @grade }
-      else
-        format.html { render :edit }
-        format.json { render json: @grade.errors, status: :unprocessable_entity }
-      end
+    if @grade.update(grade_params)
+      redirect_to @grade, notice: 'Grade was successfully updated.'
+    else
+      render :edit
     end
   end
 
@@ -56,11 +47,8 @@ class GradesController < ApplicationController
   # DELETE /grades/1.json
   def destroy
     @grade.destroy
-    respond_to do |format|
-      format.html { redirect_to grades_url, notice: 'Grade was successfully destroyed.' }
-      format.json { head :no_content }
+      redirect_to grades_url, notice: 'Grade was successfully destroyed.'
     end
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
