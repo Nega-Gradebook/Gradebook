@@ -26,7 +26,6 @@ class TeachersController < ApplicationController
   # POST /teachers.json
   def create
     @teacher = Teacher.new(teacher_params)
-
     if @teacher.save
       redirect_to @teacher, notice: 'Teacher was successfully created.'
     else
