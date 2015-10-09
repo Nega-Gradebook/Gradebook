@@ -24,6 +24,30 @@
     <%= f.text_field :password %><br>
   </div>
 
+  <br>
+  <h2>Edit Students</h2>
+  <%= f.fields_for :students do |ff| %>
+    <div>
+      <div class="subfield">
+        <%= ff.label :name %><br>
+        <%= ff.text_field :name %>
+      </div>
+      <div class="subfield">
+        <%= ff.label :email %><br>
+        <%= ff.text_field :email %>
+      </div>
+      <div class="subfield">
+        <%= ff.label :password %><br>
+        <%= ff.text_field :password %><br>
+      </div>
+      <div class="subfield">
+        <%= ff.label :teacher_id %><br>
+        <%= ff.text_field :teacher_id %><br>
+      </div>
+    </div>
+  <% end %>
+
+  <br>
   <div class="actions">
     <%= f.submit %>
   </div>

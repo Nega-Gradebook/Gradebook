@@ -28,9 +28,8 @@ class SessionsController < ApplicationController
 
 
   def destroy
-    session[:logged_in_teacher] = false
-    session[:logged_in_student] = false
-    session[:logged_in_parent] = false
+    session[:user_type] = false
+    session[:user_id] = false
     redirect_to login_path, alert: "you have successfully logged out."
   end
 
