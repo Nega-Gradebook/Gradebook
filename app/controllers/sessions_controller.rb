@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
       if teacher && teacher.authenticate(params[:password])
         session[:user_type] = "Teacher"
         session[:user_id] = teacher.id
-        redirect_to teacher_path(teacher.id), notice: "You successfully logged in."
+        redirect_to dashboard_index_path, notice: "You successfully logged in."
       elsif student && student.authenticate(params[:password])
         session[:user_type] = "Student"
         session[:user_id] = student.id

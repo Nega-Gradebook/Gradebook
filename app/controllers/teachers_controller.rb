@@ -69,7 +69,7 @@ class TeachersController < ApplicationController
     def others_allowed_access?
        teacher_ids = Teacher.all.map {|p| p.id}
     unless (teacher_ids.include?(session[:user_id]) && session[:user_type] == "Teacher")
-      redirect_to root_path, notice: "access denied, Nice try."
+      redirect_to dashboard_index_path, notice: "access denied, Nice try."
     end
   end
 end
