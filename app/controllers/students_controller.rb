@@ -76,7 +76,7 @@ class StudentsController < ApplicationController
 
     def parent_allowed_access?
       parent_ids = @student.parents.map {|p| p.id}
-      unless (parent_ids.include?(session[:user_id]) && session[:user_type] == "Parent") || (session[:user_id] == @student.id && session[:user_type] == "Student")
+      unless (parent_ids.include?(session[:user_id]) && session[:user_type] == "Parent") || (session[:user_id] == @student.id && session[:user_type] == "Student") || (session[:user_id] == @student.teacher_id && session[:user_type] == "Teacher")
         redirect_to root_path, notice: "access denied, I need a parent!!."
       end
     end
