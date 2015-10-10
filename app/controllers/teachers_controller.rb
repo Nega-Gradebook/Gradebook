@@ -18,11 +18,14 @@ class TeachersController < ApplicationController
   def new
     @teacher = Teacher.new
     @teacher.students.build
+    @teacher.grades.build
   end
 
   # GET /teachers/1/edit
   def edit
     @teacher.students.build
+    @teacher.grades.build
+
   end
 
   # POST /teachers
