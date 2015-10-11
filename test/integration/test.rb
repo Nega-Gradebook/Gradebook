@@ -1,6 +1,9 @@
 require 'test_helper'
 
-class IntegrationTest < ActionController::TestCase
+#it doesn't seem that rake is running my integration tests, but here are a pair
+#of attempts so we can at least talk about how to make them better.
+
+class IntegrationTest < ActionDispatch::IntegrationTest
   test "login page works" do
     get '/session/new'
     assert_redirect_to session_new_path
@@ -16,6 +19,24 @@ class IntegrationTest < ActionController::TestCase
     assert_select "tr", 2
   end
 
-  test 
+  test "must log in to see show page" do
+    get '/session/new'
+    assert_redirect_to session_new_path
+    post login_path, session: {email: "", password: ""}
+    assert_redirected_to dashboards_path
+    get '/session/new'
+    assert_redirect_to session_new_path
+    post login_path, session: {email: "billnye@scienceguy.com", password: "password"}
+    assert_redirected_to teachers_path
+    follow_redirect!
+    assert_select "billnye@scienceguy.com"
+    get edit_teacher_path
+    follow_redirect!
+    assert_select "profile"
+  end
+
+  test do
+    
+  end
 
 end

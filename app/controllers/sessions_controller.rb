@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
         session[:user_id] = parent.id
         redirect_to student_path(parent.student), notice:  "You successfully logged in."
       else
-        redirect_to dashboard_index_path, notice:  "Your login was not successful."
+        redirect_to new_session_path, notice:  "Incorrect email/password."
       end
     end
   end
