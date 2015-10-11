@@ -8,17 +8,17 @@ class SessionsController < ApplicationController
       if teacher && teacher.authenticate(params[:password])
         session[:user_type] = "Teacher"
         session[:user_id] = teacher.id
-        redirect_to teacher_path(teacher.id), notice: "You successfully logged in."
+        redirect_to teacher_path(teacher.id), notice:  "You successfully logged in."
       elsif student && student.authenticate(params[:password])
         session[:user_type] = "Student"
         session[:user_id] = student.id
-        redirect_to student_path(student.id), notice: "You successfully logged in."
+        redirect_to student_path(student.id), notice:  "You successfully logged in."
       elsif parent && parent.authenticate(params[:password])
         session[:user_type] = "Parent"
         session[:user_id] = parent.id
-        redirect_to student_path(parent.student), notice: "You successfully logged in."
+        redirect_to student_path(parent.student), notice:  "You successfully logged in."
       else
-        redirect_to dashboard_index_path, notice: "Your login was not successful."
+        redirect_to dashboard_index_path, notice:  "Your login was not successful."
       end
     end
   end

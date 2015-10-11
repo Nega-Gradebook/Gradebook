@@ -29,7 +29,7 @@ class ParentsController < ApplicationController
 
     respond_to do |format|
       if @parent.save
-        format.html { redirect_to @parent, notice: 'Parent was successfully created.' }
+        format.html { redirect_to @parent, notice:  'Parent was successfully created.' }
         format.json { render :show, status: :created, location: @parent }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class ParentsController < ApplicationController
   def update
     respond_to do |format|
       if @parent.update(parent_params)
-        format.html { redirect_to @parent, notice: 'Parent was successfully updated.' }
+        format.html { redirect_to @parent, notice:  'Parent was successfully updated.' }
         format.json { render :show, status: :ok, location: @parent }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class ParentsController < ApplicationController
   def destroy
     @parent.destroy
     respond_to do |format|
-      format.html { redirect_to parents_url, notice: 'Parent was successfully destroyed.' }
+      format.html { redirect_to parents_url, notice:  'Parent was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -78,7 +78,7 @@ class ParentsController < ApplicationController
        teacher_ids = Teacher.all.map {|p| p.id}
 
     unless (parent_ids.include?(session[:user_id]) && session[:user_type] == "Parent") || (teacher_ids.include?(session[:user_id]) && session[:user_type] == "Teacher")
-      redirect_to dashboard_index_path, notice: "access denied, Nice try."
+      redirect_to dashboard_index_path, notice:  "access denied, Nice try."
     end
   end
 end

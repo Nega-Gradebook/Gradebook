@@ -33,7 +33,7 @@ class TeachersController < ApplicationController
   def create
     @teacher = Teacher.new(teacher_params)
     if @teacher.save
-      redirect_to @teacher, notice: 'Teacher was successfully created.'
+      redirect_to @teacher, notice:  'Teacher was successfully created.'
     else
       render :new
     end
@@ -41,7 +41,7 @@ class TeachersController < ApplicationController
 
   def update
     if @teacher.update(teacher_params)
-      redirect_to @teacher, notice: 'Teacher was successfully updated.'
+      redirect_to @teacher, notice:  'Teacher was successfully updated.'
     else
       render :edit
     end
@@ -49,7 +49,7 @@ class TeachersController < ApplicationController
 
   def destroy
     @teacher.destroy
-    redirect_to teachers_url, notice: 'Teacher was successfully destroyed.'
+    redirect_to teachers_url, notice:  'Teacher was successfully destroyed.'
   end
 
   private
@@ -69,7 +69,7 @@ class TeachersController < ApplicationController
     def others_allowed_access?
        teacher_ids = Teacher.all.map {|p| p.id}
     unless (teacher_ids.include?(session[:user_id]) && session[:user_type] == "Teacher")
-      redirect_to dashboard_index_path, notice: "access denied, Nice try."
+      redirect_to dashboard_index_path, notice:  "access denied, Nice try."
     end
   end
 end
