@@ -22,7 +22,7 @@
       <tr>
         <td><h4><%= student.name %></h4></td>
       </tr>
-        <% @teacher.grades.each do |g| %>
+        <% student.grades.each do |g| %>
       <tr>
         <td><%= g.assignment_name %></td>
           <td><%= g.grade %></td>
