@@ -1,11 +1,16 @@
 class ParentsController < ApplicationController
   before_action :set_parent, only: [:show, :edit, :update, :destroy]
   before_action :logged_in?
-
+  before_action :others_allowed_access?
   # GET /parents
   # GET /parents.json
   def index
-    @parents = Parent.all
+    teacher_ids = Teacher.all.map {|p| p.id}
+    if (teacher_ids.include?(session[:user_id]) && session[:user_type] == "Teacher")
+      @parent = Parent.all
+    else
+      @parent = Parent.where(id: session[:user_id])
+    end
   end
 
   # GET /parents/1
@@ -15,7 +20,12 @@ class ParentsController < ApplicationController
 
   # GET /parents/new
   def new
-    @parent = Parent.new
+    teacher_ids = Teacher.all.map {|p| p.id}
+    if (teacher_ids.include?(session[:user_id]) && session[:user_type] == "Teacher")
+      @parent = Parent.new
+    else
+    redirect_to dashboard_index_path, notice:  "access denied, Nice try."
+    end
   end
 
   # GET /parents/1/edit
@@ -29,7 +39,7 @@ class ParentsController < ApplicationController
 
     respond_to do |format|
       if @parent.save
-        format.html { redirect_to @parent, notice: 'Parent was successfully created.' }
+        format.html { redirect_to @parent, notice:  'Parent was successfully created.' }
         format.json { render :show, status: :created, location: @parent }
       else
         format.html { render :new }
@@ -43,7 +53,7 @@ class ParentsController < ApplicationController
   def update
     respond_to do |format|
       if @parent.update(parent_params)
-        format.html { redirect_to @parent, notice: 'Parent was successfully updated.' }
+        format.html { redirect_to @parent, notice:  'Parent was successfully updated.' }
         format.json { render :show, status: :ok, location: @parent }
       else
         format.html { render :edit }
@@ -57,7 +67,7 @@ class ParentsController < ApplicationController
   def destroy
     @parent.destroy
     respond_to do |format|
-      format.html { redirect_to parents_url, notice: 'Parent was successfully destroyed.' }
+      format.html { redirect_to parents_url, notice:  'Parent was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -72,4 +82,13 @@ class ParentsController < ApplicationController
     def parent_params
       params.require(:parent).permit(:name, :email, :password, :student_id)
     end
+
+    def others_allowed_access?
+       parent_ids = Parent.all.map {|p| p.id}
+       teacher_ids = Teacher.all.map {|p| p.id}
+
+    unless (parent_ids.include?(session[:user_id]) && session[:user_type] == "Parent") || (teacher_ids.include?(session[:user_id]) && session[:user_type] == "Teacher")
+      redirect_to dashboard_index_path, notice:  "access denied, Nice try."
+    end
+  end
 end

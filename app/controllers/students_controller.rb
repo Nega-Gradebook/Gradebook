@@ -4,20 +4,23 @@ class StudentsController < ApplicationController
   before_action :parent_and_student_allowed_access?, only: [:show]
 
   # GET /students
-  # GET /students.json
   def index
-    @students = Student.all
+    @student = Student.all
   end
 
   # GET /students/1
-  # GET /students/1.json
   def show
 
   end
 
   # GET /students/new
   def new
-    @student = Student.new
+    teacher_ids = Teacher.all.map {|p| p.id}
+    if (teacher_ids.include?(session[:user_id]) && session[:user_type] == "Teacher")
+      @student = Student.new
+    else
+    redirect_to dashboard_index_path, notice:  "access denied, Nice try."
+    end
   end
 
   # GET /students/1/edit
@@ -29,7 +32,7 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       if @student.save
-        format.html { redirect_to @student, notice: 'Student was successfully created.' }
+        format.html { redirect_to @student, notice:  'Student was successfully created.' }
         format.json { render :show, status: :created, location: @student }
       else
         format.html { render :new }
@@ -39,25 +42,22 @@ class StudentsController < ApplicationController
   end
 
   # PATCH/PUT /students/1
-  # PATCH/PUT /students/1.json
   def update
     respond_to do |format|
       if @student.update(student_params)
-        format.html { redirect_to @student, notice: 'Student was successfully updated.' }
+        format.html { redirect_to @student, notice:  'Student was successfully updated.' }
         format.json { render :show, status: :ok, location: @student }
       else
-        format.html { render :edit }
-        format.json { render json: @student.errors, status: :unprocessable_entity }
+        format.html { render :edit}
       end
     end
   end
 
   # DELETE /students/1
-  # DELETE /students/1.json
   def destroy
     @student.destroy
     respond_to do |format|
-      format.html { redirect_to students_url, notice: 'Student was successfully destroyed.' }
+      format.html { redirect_to students_url, notice:  'Student was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -75,8 +75,8 @@ class StudentsController < ApplicationController
 
     def parent_and_student_allowed_access?
       parent_ids = @student.parents.map {|p| p.id}
-      unless (session[:user_id] == @student.teacher_id && session[:user_type] == "Teacher") || (parent_ids.include?(session[:user_id]) && session[:user_type] == "Parent") || session[:user_id] == @student.id && session[:user_type] == "Student"
-        redirect_to root_path, notice: "access denied."
+      unless (parent_ids.include?(session[:user_id]) && session[:user_type] == "Parent") || (session[:user_id] == @student.id && session[:user_type] == "Student") || (session[:user_id] == @student.teacher_id && session[:user_type] == "Teacher")
+        redirect_to dashboard_index_path, notice:  "access denied, I need a parent!!."
       end
     end
 end

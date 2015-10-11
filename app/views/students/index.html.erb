@@ -18,9 +18,13 @@
         <td><%= student.name %></td>
         <td><%= student.email %></td>
         <td><%= student.teacher_id %></td>
+        <td><%= link_to 'Edit', edit_teacher_path(student) %></td>
+        <td><%= link_to 'Show', student %></td>
+
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
+<div><%= link_to 'Dashboard', dashboard_index_path%></div>

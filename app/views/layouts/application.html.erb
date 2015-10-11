@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html>
+<%= render 'partials/navbar' %>
+<%= notice %>
 <head>
   <title>NegaGradebook</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -9,7 +11,7 @@
 <body>
 
 <%= yield %>
-<p><h3><%= link_to 'Log Out', logout_path, method: :delete, data: {confirm: 'Are you sure you want to log out?'} %></h3></p>
+|| <%= link_to 'Logout', logout_path, method: :delete %>
 
 </body>
 </html>
