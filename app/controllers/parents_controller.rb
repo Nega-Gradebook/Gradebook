@@ -5,7 +5,12 @@ class ParentsController < ApplicationController
   # GET /parents
   # GET /parents.json
   def index
-    @parents = Parent.all
+    teacher_ids = Teacher.all.map {|p| p.id}
+    if (teacher_ids.include?(session[:user_id]) && session[:user_type] == "Teacher")
+      @parent = Parent.all
+    else
+      @parent = Parent.where(id: session[:user_id])
+    end
   end
 
   # GET /parents/1
@@ -15,7 +20,12 @@ class ParentsController < ApplicationController
 
   # GET /parents/new
   def new
-    @parent = Parent.new
+    teacher_ids = Teacher.all.map {|p| p.id}
+    if (teacher_ids.include?(session[:user_id]) && session[:user_type] == "Teacher")
+      @parent = Parent.new
+    else
+    redirect_to dashboard_index_path, notice:  "access denied, Nice try."
+    end
   end
 
   # GET /parents/1/edit
