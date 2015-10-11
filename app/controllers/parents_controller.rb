@@ -7,9 +7,9 @@ class ParentsController < ApplicationController
   def index
     teacher_ids = Teacher.all.map {|p| p.id}
     if (teacher_ids.include?(session[:user_id]) && session[:user_type] == "Teacher")
-      @parents = Parent.all
+      @parent = Parent.all
     else
-      @parents = Parent.where(id: session[:user_id])
+      @parent = Parent.where(id: session[:user_id])
     end
   end
 
@@ -22,7 +22,7 @@ class ParentsController < ApplicationController
   def new
     teacher_ids = Teacher.all.map {|p| p.id}
     if (teacher_ids.include?(session[:user_id]) && session[:user_type] == "Teacher")
-      @parents = Parent.new
+      @parent = Parent.new
     else
     redirect_to dashboard_index_path, notice:  "access denied, Nice try."
     end

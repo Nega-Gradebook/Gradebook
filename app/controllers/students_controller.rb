@@ -5,7 +5,7 @@ class StudentsController < ApplicationController
 
   # GET /students
   def index
-    @students = Student.all
+    @student = Student.all
   end
 
   # GET /students/1
@@ -17,7 +17,7 @@ class StudentsController < ApplicationController
   def new
     teacher_ids = Teacher.all.map {|p| p.id}
     if (teacher_ids.include?(session[:user_id]) && session[:user_type] == "Teacher")
-      @students = Student.new
+      @student = Student.new
     else
     redirect_to dashboard_index_path, notice:  "access denied, Nice try."
     end
