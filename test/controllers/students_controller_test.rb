@@ -1,10 +1,12 @@
 require 'test_helper'
 
 class StudentsControllerTest < ActionController::TestCase
-  # setup do
-  #   @student = students(:one)
-  # end
-  #
+  setup do
+    @student = students(:one)
+    session[:user_id] = teachers(:one).id
+    session[:user_type] = "Teacher"
+  end
+
   # test "should get index" do
   #   get :index
   #   assert_response :success
@@ -22,13 +24,13 @@ class StudentsControllerTest < ActionController::TestCase
   #   end
   #
   #   assert_redirected_to student_path(assigns(:student))
-  # end
+  # # end
   #
   # test "should show student" do
   #   get :show, id: @student
   #   assert_response :success
   # end
-  #
+
   # test "should get edit" do
   #   get :edit, id: @student
   #   assert_response :success

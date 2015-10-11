@@ -43,7 +43,7 @@ class StudentsController < ApplicationController
         format.html { redirect_to @student, notice:  'Student was successfully updated.' }
         format.json { render :show, status: :ok, location: @student }
       else
-        format.html { render :edit
+        format.html { render :edit}
       end
     end
   end

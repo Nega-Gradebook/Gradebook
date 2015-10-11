@@ -5,12 +5,12 @@ class GradesControllerTest < ActionController::TestCase
   setup do
     @grade = grades(:one)
   end
-  
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:grades)
-  end
+  # 
+  # test "should get index" do
+  #   get :index
+  #   assert_response :success
+  #   assert_not_nil assigns(:grades)
+  # end
 
   # test "should get new" do
   #   get :new

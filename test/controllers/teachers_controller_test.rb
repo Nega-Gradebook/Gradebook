@@ -1,10 +1,10 @@
 require 'test_helper'
 
 class TeachersControllerTest < ActionController::TestCase
-  # setup do
-  #   @teacher = teachers(:one)
-  # end
-  #
+  setup do
+    @teacher = teachers(:one)
+  end
+
   # test "should get index" do
   #   get :index
   #   assert_response :success
