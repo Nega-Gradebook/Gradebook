@@ -18,11 +18,14 @@ class TeachersController < ApplicationController
   def new
     @teacher = Teacher.new
     @teacher.students.build
+    @teacher.grades.build
   end
 
   # GET /teachers/1/edit
   def edit
     @teacher.students.build
+    @teacher.grades.build
+
   end
 
   # POST /teachers
@@ -30,7 +33,7 @@ class TeachersController < ApplicationController
   def create
     @teacher = Teacher.new(teacher_params)
     if @teacher.save
-      redirect_to @teacher, notice: 'Teacher was successfully created.'
+      redirect_to @teacher, notice:  'Teacher was successfully created.'
     else
       render :new
     end
@@ -38,7 +41,7 @@ class TeachersController < ApplicationController
 
   def update
     if @teacher.update(teacher_params)
-      redirect_to @teacher, notice: 'Teacher was successfully updated.'
+      redirect_to @teacher, notice:  'Teacher was successfully updated.'
     else
       render :edit
     end
@@ -46,7 +49,7 @@ class TeachersController < ApplicationController
 
   def destroy
     @teacher.destroy
-    redirect_to teachers_url, notice: 'Teacher was successfully destroyed.'
+    redirect_to teachers_url, notice:  'Teacher was successfully destroyed.'
   end
 
   private
@@ -57,12 +60,16 @@ class TeachersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def teacher_params
-      params.require(:teacher).permit( :name, :email, :password, student_attributes: [:name, :email, :password, :teacher_id])
+      params.require(:teacher).permit( :name, :email, :password,
+      student_attributes: [:name, :email, :password, :teacher_id],
+      grade_attributes: [:student_id, :assignment_name, :grade])
     end
 
+
     def others_allowed_access?
-      unless (session[:user_id] == @teacher.id && session[:user_type] == "Teacher")
-        redirect_to root_path, notice: "access denied."
-      end
+       teacher_ids = Teacher.all.map {|p| p.id}
+    unless (teacher_ids.include?(session[:user_id]) && session[:user_type] == "Teacher")
+      redirect_to dashboard_index_path, notice:  "access denied, Nice try."
     end
+  end
 end

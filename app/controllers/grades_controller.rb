@@ -27,7 +27,7 @@ class GradesController < ApplicationController
   def create
     @grade = Grade.new(grade_params)
     if @grade.save
-      redirect_to @grade, notice: 'Grade was successfully created.'
+      redirect_to @grade, notice:  'Grade was successfully created.'
     else
       render :new
     end
@@ -37,7 +37,7 @@ class GradesController < ApplicationController
   # PATCH/PUT /grades/1.json
   def update
     if @grade.update(grade_params)
-      redirect_to @grade, notice: 'Grade was successfully updated.'
+      redirect_to @grade, notice:  'Grade was successfully updated.'
     else
       render :edit
     end
@@ -47,7 +47,7 @@ class GradesController < ApplicationController
   # DELETE /grades/1.json
   def destroy
     @grade.destroy
-      redirect_to grades_url, notice: 'Grade was successfully destroyed.'
+      redirect_to grades_url, notice:  'Grade was successfully destroyed.'
     end
 
   private

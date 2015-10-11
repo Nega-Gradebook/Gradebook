@@ -1,0 +1,15 @@
+<h1>Welcome to the Gradebook Dashboard</h1>
+
+<h3>For Teachers:</h3>
+<%= link_to 'Teacher Index', teachers_path %> ||
+<%= link_to 'Parent Index', parents_path %> ||
+<%= link_to 'Student Index', students_path %> ||
+<%= link_to 'Grade Index', grades_path %>
+<div></div>
+<%= link_to 'Add New Teacher', new_teacher_path %> ||
+<%= link_to 'Add New Parent', new_parent_path %> ||
+<%= link_to 'Add New Student', new_student_path %> ||
+<%= link_to 'Add New Grade', new_grade_path %>
+<h3>For Parents and Students:</h3>
+<%= link_to 'Student Index', students_path %> ||
+<%= link_to 'Grade Index', grades_path %>

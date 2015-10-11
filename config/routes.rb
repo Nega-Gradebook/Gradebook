@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'dashboard/index'
+
   root 'sessions#new'
   post 'login' => 'sessions#create'
   get  'login' => 'sessions#new'
@@ -10,6 +12,7 @@ Rails.application.routes.draw do
   resources :students
   resources :teachers
   resources :sessions
+  resources :dashboards
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
