@@ -17,10 +17,8 @@
       <tr>
         <td><%= parent.name %></td>
         <td><%= parent.email %></td>
-        <td><%= parent.student_id %></td>
+        <td><%= parent.student.name%></td>
         <td><%= link_to 'Show', parent %></td>
-        <td><%= link_to 'Edit', edit_parent_path(parent) %></td>
-        <td><%= link_to 'Destroy', parent, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,3 +26,10 @@
 
 <br>
 <div><%= link_to 'Dashboard', dashboard_index_path%></div>
+
+from the parents table i want to extract the student id
+  p = parent.student_id
+Then take that id and get the name of the student with that id
+  Student.where(id == p).name
+Student.find_by(params[p]).name
+<p><h3><%= link_to 'Log Out', logout_path, method: :delete, data: {confirm: 'Are you sure you want to log out?'} %></h3></p>
