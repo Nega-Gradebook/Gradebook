@@ -35,8 +35,16 @@ class IntegrationTest < ActionDispatch::IntegrationTest
     assert_select "profile"
   end
 
-  test do
-    
+  test "students can change their password" do
+    get '/session/new'
+    assert_redirect_to session_new_path
+    post login_path, session: {email: "joey@doe.com", password: "password"}
+    assert_redirected_to student_path
+    follow_redirect!
+    assert_select "Joey Doe"
+    get edit_student_path
+    follow_redirect!
+    assert_select "password"
   end
 
 end
