@@ -23,6 +23,10 @@
     <%= f.label :password %><br>
     <%= f.text_field :password %><br>
   </div>
+  <div class="field">
+    <%= f.check_box :_destroy %>
+    <%= f.label :_destroy_teacher %><br>
+  </div>
 
   <br>
   <%= f.fields_for :students do |ff| %>
@@ -37,6 +41,10 @@
       <div class="subfield">
         <%= ff.label :password %><br>
         <%= ff.text_field :password %><br>
+      </div>
+      <div class="subfield">
+        <%= ff.check_box :_destroy %>
+        <%= ff.label :_destroy_student %><br>
       </div>
       </div>
     </div>
@@ -54,6 +62,10 @@
         <div class="subsubfield">
           <%= fff.label :grade %><br>
           <%= fff.text_field :grade %><br>
+        </div>
+        <div class="subsubfield">
+          <%= fff.check_box :_destroy %>
+          <%= fff.label :_destroy_assignment %><br>
         </div>
       </div>
       <% end %>

@@ -18,6 +18,8 @@ class StudentsController < ApplicationController
     teacher_ids = Teacher.all.map {|p| p.id}
     if (teacher_ids.include?(session[:user_id]) && session[:user_type] == "Teacher")
       @student = Student.new
+      @student.grades.build
+
     else
     redirect_to dashboard_index_path, notice:  "access denied, Nice try."
     end
@@ -25,6 +27,8 @@ class StudentsController < ApplicationController
 
   # GET /students/1/edit
   def edit
+    @student.grades.build
+
   end
 
   def create

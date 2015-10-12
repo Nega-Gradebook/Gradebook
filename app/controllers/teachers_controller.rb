@@ -25,7 +25,6 @@ class TeachersController < ApplicationController
   def edit
     @teacher.students.build
     @teacher.grades.build
-
   end
 
   # POST /teachers
