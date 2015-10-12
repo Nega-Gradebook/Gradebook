@@ -37,9 +37,15 @@
       <div class="subfield">
         <%= ff.label :password %><br>
         <%= ff.text_field :password %><br>
+        <div class="subfield">
+          <%= ff.check_box :_destroy %><br>
+          <%= ff.label :_destroy %><br>
+        </div>
       </div>
       </div>
     </div>
+    </div>
+
     <%= ff.fields_for :grades do |fff| %>
     <h4>Edit Grades</h4>
       <div>
@@ -54,6 +60,10 @@
         <div class="subsubfield">
           <%= fff.label :grade %><br>
           <%= fff.text_field :grade %><br>
+        </div>
+        <div class="subfield">
+          <%= fff.check_box :_destroy %><br>
+          <%= fff.label :_destroy %><br>
         </div>
       </div>
       <% end %>
