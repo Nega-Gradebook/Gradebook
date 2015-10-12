@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 
 <h1>Listing Students</h1>
 
@@ -17,7 +16,7 @@
       <tr>
         <td><%= student.name %></td>
         <td><%= student.email %></td>
-        <td><%= student.teacher_id %></td>
+        <td><%= student.teacher.name%></td>
         <td><%= link_to 'Edit', edit_teacher_path(student) %></td>
         <td><%= link_to 'Show', student %></td>
 

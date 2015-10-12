@@ -35,20 +35,19 @@
       <div class="subfield">
         <%= ff.label :name %><br>
         <%= ff.text_field :name %>
+      </div>
       <div class="subfield">
         <%= ff.label :email %><br>
         <%= ff.text_field :email %>
+      </div>
       <div class="subfield">
         <%= ff.label :password %><br>
         <%= ff.text_field :password %><br>
-      
       </div>
       <div class="subfield">
         <%= ff.check_box :_destroy %>
         <%= ff.label :_destroy_student %><br>
       </div>
-      </div>
-    </div>
     </div>
 
     <%= ff.fields_for :grades do |fff| %>

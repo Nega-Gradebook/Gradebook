@@ -18,7 +18,9 @@ class TeachersController < ApplicationController
   def new
     @teacher = Teacher.new
     @teacher.students.build
-    @teacher.grades.build
+    @teacher.students.each do |x|
+      x.grades.build
+    end
   end
 
   # GET /teachers/1/edit
@@ -60,8 +62,8 @@ class TeachersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def teacher_params
       params.require(:teacher).permit( :name, :email, :password,
-      students_attributes: [:id, :name, :email, :password, :teacher_id],
-      grades_attributes: [:student_id, :assignment_name, :grade])
+      students_attributes: [:id, :name, :email, :password, :teacher_id, :_delete,
+        grades_attributes: [:id, :student_id, :assignment_name, :grade, :_delete]])
     end
 
 
